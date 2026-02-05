@@ -151,11 +151,12 @@ bigbro analyze src --fix</code></pre>
   analyzeFile,
   analyzeFiles,
 } from "big-brocode";
-
+const stackString = 'your stack trace string here eg: "TypeError: ... at file.js:10:5"';
 const entry = explainError({ message: "TS2339: Property 'x' does not exist" });
 const stackEntry = explainFromStackTrace(stackString);
 const single = analyzeFile("src/example.ts");
-const many = analyzeFiles(["src/**/*.ts"]);</code></pre>
+const many = analyzeFiles(["src/**/*.ts"]);
+</code></pre>
           </div>
 
           <div
