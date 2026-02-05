@@ -1,64 +1,74 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>big-brocode — Fast Error Explanations</title>
-  <meta name="description" content="Explain JS/TS/React errors fast with TypeScript-powered diagnostics, multiple output formats, and safe autofix hooks." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body class="no-js">
-  <div class="page">
-    <header class="site-header">
-      <div class="container nav">
-        <a class="logo" href="index.html">big-brocode</a>
-        <nav class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#workflow">Workflow</a>
-          <a href="#examples">Examples</a>
-          <a href="docs.html" class="button ghost">Docs</a>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero container">
-        <div class="hero-copy">
-          <p class="badge reveal" style="--delay: 0ms">CLI + Library</p>
-          <h1 class="reveal" style="--delay: 80ms">Make error messages feel like a teammate, not a wall.</h1>
-          <p class="lead reveal" style="--delay: 140ms">
-            big-brocode explains JavaScript, TypeScript, and React errors in plain language. Fast hints, real diagnostics, and clean output formats so you can ship without context switching.
-          </p>
-          <div class="hero-actions reveal" style="--delay: 200ms">
-            <a class="button" href="docs.html">Read the docs</a>
-            <a class="button ghost" href="#examples">See examples</a>
-          </div>
-          <div class="hero-stats reveal" style="--delay: 260ms">
-            <div>
-              <span class="stat">4</span>
-              <span class="stat-label">Output formats</span>
-            </div>
-            <div>
-              <span class="stat">0-2</span>
-              <span class="stat-label">Exit codes</span>
-            </div>
-            <div>
-              <span class="stat">TypeScript</span>
-              <span class="stat-label">Powered scans</span>
-            </div>
-          </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>big-brocode ï¿½ Fast Error Explanations</title>
+    <meta
+      name="description"
+      content="Explain JS/TS/React errors fast with TypeScript-powered diagnostics, multiple output formats, and safe autofix hooks."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="no-js">
+    <div class="page">
+      <header class="site-header">
+        <div class="container nav">
+          <a class="logo" href="index.html">big-brocode</a>
+          <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#examples">Examples</a>
+            <a href="docs.html" class="button ghost">Docs</a>
+          </nav>
         </div>
-        <div class="hero-panel reveal" style="--delay: 120ms">
-          <div class="panel-header">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="panel-title">terminal</span>
+      </header>
+
+      <main>
+        <section class="hero container">
+          <div class="hero-copy">
+            <p class="badge reveal" style="--delay: 0ms">CLI + Library</p>
+            <h1 class="reveal" style="--delay: 80ms">
+              Make error messages feel like a teammate, not a wall.
+            </h1>
+            <p class="lead reveal" style="--delay: 140ms">
+              big-brocode explains JavaScript, TypeScript, and React errors in
+              plain language. Fast hints, real diagnostics, and clean output
+              formats so you can ship without context switching.
+            </p>
+            <div class="hero-actions reveal" style="--delay: 200ms">
+              <a class="button" href="docs.html">Read the docs</a>
+              <a class="button ghost" href="#examples">See examples</a>
+            </div>
+            <div class="hero-stats reveal" style="--delay: 260ms">
+              <div>
+                <span class="stat">4</span>
+                <span class="stat-label">Output formats</span>
+              </div>
+              <div>
+                <span class="stat">0-2</span>
+                <span class="stat-label">Exit codes</span>
+              </div>
+              <div>
+                <span class="stat">TypeScript</span>
+                <span class="stat-label">Powered scans</span>
+              </div>
+            </div>
           </div>
-          <pre><code>$ npm install -g big-brocode
+          <div class="hero-panel reveal" style="--delay: 120ms">
+            <div class="panel-header">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="panel-title">terminal</span>
+            </div>
+            <pre><code>$ npm install -g big-brocode
 $ bigbro "TS2339: Property 'x' does not exist"
 
 Explains the root cause and suggests a fix.
@@ -66,88 +76,116 @@ Explains the root cause and suggests a fix.
 $ bigbro analyze src --format sarif
 
 Finds issues across a project with real TS diagnostics.</code></pre>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <section id="features" class="section container">
-        <div class="section-title reveal">Built for the moments that slow you down.</div>
-        <div class="grid-3">
-          <article class="card reveal" style="--delay: 0ms">
-            <h3>Precision explainers</h3>
-            <p>Match raw text, codes, and stack traces with curated explanations that read like a human, not a compiler.</p>
-          </article>
-          <article class="card reveal" style="--delay: 80ms">
-            <h3>TypeScript-backed scans</h3>
-            <p>Run real diagnostics over your project for the issues heuristics miss, without the heavy CLI footprint.</p>
-          </article>
-          <article class="card reveal" style="--delay: 160ms">
-            <h3>Flexible outputs</h3>
-            <p>Text for humans, JSON for tooling, ESLint for CI, SARIF for security dashboards.</p>
-          </article>
-        </div>
-      </section>
+        <section id="features" class="section container">
+          <div class="section-title reveal">
+            Built for the moments that slow you down.
+          </div>
+          <div class="grid-3">
+            <article class="card reveal" style="--delay: 0ms">
+              <h3>Precision explainers</h3>
+              <p>
+                Match raw text, codes, and stack traces with curated
+                explanations that read like a developer, not a compiler.
+              </p>
+            </article>
+            <article class="card reveal" style="--delay: 80ms">
+              <h3>TypeScript-backed scans</h3>
+              <p>
+                Run real diagnostics over your project for the issues heuristics
+                miss, without the heavy CLI footprint.
+              </p>
+            </article>
+            <article class="card reveal" style="--delay: 160ms">
+              <h3>Flexible outputs</h3>
+              <p>
+                Text for developers, JSON for tooling, ESLint for CI, SARIF for
+                security dashboards.
+              </p>
+            </article>
+          </div>
+        </section>
 
-      <section id="workflow" class="section contrast">
-        <div class="container">
-          <div class="section-title reveal">From error to action in one flow.</div>
-          <div class="grid-2">
-            <div class="flow reveal" style="--delay: 0ms">
-              <h4>1. Paste the error</h4>
-              <p>Drop in a message, code, or stack trace. big-brocode auto-detects language and context.</p>
+        <section id="workflow" class="section contrast">
+          <div class="container">
+            <div class="section-title reveal">
+              From error to action in one flow.
             </div>
-            <div class="flow reveal" style="--delay: 80ms">
-              <h4>2. Get the story</h4>
-              <p>See why it happened, what file likely triggered it, and the fastest fix that matches your stack.</p>
-            </div>
-            <div class="flow reveal" style="--delay: 120ms">
-              <h4>3. Scan the project</h4>
-              <p>Run analyze mode to surface TypeScript diagnostics and safe autofix hints before CI does.</p>
-            </div>
-            <div class="flow reveal" style="--delay: 160ms">
-              <h4>4. Export everywhere</h4>
-              <p>Integrate with linting workflows, dashboards, or scripts. One command, structured output.</p>
+            <div class="grid-2">
+              <div class="flow reveal" style="--delay: 0ms">
+                <h4>1. Paste the error</h4>
+                <p>
+                  Drop in a message, code, or stack trace. big-brocode
+                  auto-detects language and context.
+                </p>
+              </div>
+              <div class="flow reveal" style="--delay: 80ms">
+                <h4>2. Get the story</h4>
+                <p>
+                  See why it happened, what file likely triggered it, and the
+                  fastest fix that matches your stack.
+                </p>
+              </div>
+              <div class="flow reveal" style="--delay: 120ms">
+                <h4>3. Scan the project</h4>
+                <p>
+                  Run analyze mode to surface TypeScript diagnostics and safe
+                  autofix hints before CI does.
+                </p>
+              </div>
+              <div class="flow reveal" style="--delay: 160ms">
+                <h4>4. Export everywhere</h4>
+                <p>
+                  Integrate with linting workflows, dashboards, or scripts. One
+                  command, structured output.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="examples" class="section container">
-        <div class="section-title reveal">A few commands to steal.</div>
-        <div class="grid-2">
-          <div class="code-card reveal" style="--delay: 0ms">
-            <h4>Explain a single error</h4>
-            <pre><code>bigbro "TypeError: Cannot read properties of undefined"
+        <section id="examples" class="section container">
+          <div class="section-title reveal">A few commands to steal.</div>
+          <div class="grid-2">
+            <div class="code-card reveal" style="--delay: 0ms">
+              <h4>Explain a single error</h4>
+              <pre><code>bigbro "TypeError: Cannot read properties of undefined"
 
 bigbro --code 2304 --language typescript</code></pre>
-          </div>
-          <div class="code-card reveal" style="--delay: 80ms">
-            <h4>Analyze a project</h4>
-            <pre><code>bigbro analyze src --format json
+            </div>
+            <div class="code-card reveal" style="--delay: 80ms">
+              <h4>Analyze a project</h4>
+              <pre><code>bigbro analyze src --format json
 
 bigbro analyze fixtures --fix</code></pre>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="cta">
-        <div class="container reveal">
-          <div>
-            <h2>Ship faster with cleaner context.</h2>
-            <p>big-brocode makes errors actionable so your focus stays on product, not debugging archaeology.</p>
+        <section class="cta">
+          <div class="container reveal">
+            <div>
+              <h2>Ship faster with cleaner context.</h2>
+              <p>
+                big-brocode makes errors actionable so your focus stays on
+                product, not debugging archaeology.
+              </p>
+            </div>
+            <a class="button" href="docs.html">Start with docs</a>
           </div>
-          <a class="button" href="docs.html">Start with docs</a>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container">
+          <span>big-brocode</span>
+          <span>Explain. Diagnose. Ship.</span>
         </div>
-      </section>
-    </main>
+      </footer>
+    </div>
 
-    <footer class="site-footer">
-      <div class="container">
-        <span>big-brocode</span>
-        <span>Explain. Diagnose. Ship.</span>
-      </div>
-    </footer>
-  </div>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

@@ -1,86 +1,110 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>big-brocode Docs</title>
-  <meta name="description" content="Docs for big-brocode: CLI usage, analyze mode, output formats, and library usage." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body class="docs no-js">
-  <div class="page">
-    <header class="site-header">
-      <div class="container nav">
-        <a class="logo" href="index.html">big-brocode</a>
-        <nav class="nav-links">
-          <a href="index.html">Home</a>
-          <a href="#cli">CLI</a>
-          <a href="#analyze">Analyze</a>
-          <a href="#library">Library</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container docs-layout">
-      <aside class="toc reveal" style="--delay: 0ms">
-        <h3>Docs</h3>
-        <a href="#overview">Overview</a>
-        <a href="#install">Install</a>
-        <a href="#cli">CLI usage</a>
-        <a href="#analyze">Analyze mode</a>
-        <a href="#formats">Output formats</a>
-        <a href="#library">Library usage</a>
-        <a href="#exit-codes">Exit codes</a>
-      </aside>
-
-      <section class="docs-content">
-        <div id="overview" class="doc-section reveal" style="--delay: 40ms">
-          <h1>Docs</h1>
-          <p class="lead">big-brocode is a CLI and ESM library for explaining JS/TS/React errors and running lightweight diagnostics with TypeScript power.</p>
-          <div class="doc-card">
-            <h4>What it does</h4>
-            <ul class="list">
-              <li>Explains raw errors, codes, and stack traces.</li>
-              <li>Runs analyze mode with TypeScript diagnostics.</li>
-              <li>Exports text, JSON, ESLint, and SARIF outputs.</li>
-            </ul>
-          </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>big-brocode Docs</title>
+    <meta
+      name="description"
+      content="Docs for big-brocode: CLI usage, analyze mode, output formats, and library usage."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="docs no-js">
+    <div class="page">
+      <header class="site-header">
+        <div class="container nav">
+          <a class="logo" href="index.html">big-brocode</a>
+          <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#cli">CLI</a>
+            <a href="#analyze">Analyze</a>
+            <a href="#library">Library</a>
+          </nav>
         </div>
+      </header>
 
-        <div id="install" class="doc-section reveal" style="--delay: 80ms">
-          <h2>Install</h2>
-          <pre><code>npm install -g big-brocode
+      <main class="container docs-layout">
+        <aside class="toc reveal" style="--delay: 0ms">
+          <h3>Docs</h3>
+          <a href="#overview">Overview</a>
+          <a href="#install">Install</a>
+          <a href="#cli">CLI usage</a>
+          <a href="#analyze">Analyze mode</a>
+          <a href="#formats">Output formats</a>
+          <a href="#library">Library usage</a>
+          <a href="#exit-codes">Exit codes</a>
+        </aside>
+
+        <section class="docs-content">
+          <div id="overview" class="doc-section reveal" style="--delay: 40ms">
+            <h1>Docs</h1>
+            <p class="lead">
+              big-brocode is a CLI and ESM library for explaining JS/TS/React
+              errors and running lightweight diagnostics with TypeScript power.
+            </p>
+            <div class="doc-card">
+              <h4>What it does</h4>
+              <ul class="list">
+                <li>Explains raw errors, codes, and stack traces.</li>
+                <li>Runs analyze mode with TypeScript diagnostics.</li>
+                <li>Exports text, JSON, ESLint, and SARIF outputs.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="install" class="doc-section reveal" style="--delay: 80ms">
+            <h2>Install</h2>
+            <pre><code>npm install -g big-brocode
 # or per-project
 npm install --save-dev big-brocode</code></pre>
-        </div>
+          </div>
 
-        <div id="cli" class="doc-section reveal" style="--delay: 120ms">
-          <h2>CLI usage</h2>
-          <p>Explain an error from a message, code, or stack trace.</p>
-          <pre><code>bigbro "TS2339: Property 'x' does not exist on type 'User'"
+          <div id="cli" class="doc-section reveal" style="--delay: 120ms">
+            <h2>CLI usage</h2>
+            <p>Explain an error from a message, code, or stack trace.</p>
+            <pre><code>bigbro "TS2339: Property 'x' does not exist on type 'User'"
 
 bigbro --message "TypeError: Cannot read properties of undefined" --language javascript
 bigbro --code 2304 --language typescript
 bigbro --stack "TypeError: Cannot read properties of undefined\n    at src/app.js:10:5"</code></pre>
-          <div class="doc-card">
-            <h4>Common options</h4>
-            <ul class="list">
-              <li><span class="label">-m, --message</span> Error message to explain.</li>
-              <li><span class="label">-l, --language</span> javascript, typescript, javascriptreact, typescriptreact.</li>
-              <li><span class="label">-c, --code</span> Numeric error code like 2339.</li>
-              <li><span class="label">-s, --stack</span> Stack trace input.</li>
-              <li><span class="label">--json</span> Shortcut for JSON output.</li>
-            </ul>
+            <div class="doc-card">
+              <h4>Common options</h4>
+              <ul class="list">
+                <li>
+                  <span class="label">-m, --message</span> Error message to
+                  explain.
+                </li>
+                <li>
+                  <span class="label">-l, --language</span> javascript,
+                  typescript, javascriptreact, typescriptreact.
+                </li>
+                <li>
+                  <span class="label">-c, --code</span> Numeric error code like
+                  2339.
+                </li>
+                <li>
+                  <span class="label">-s, --stack</span> Stack trace input.
+                </li>
+                <li>
+                  <span class="label">--json</span> Shortcut for JSON output.
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div id="analyze" class="doc-section reveal" style="--delay: 160ms">
-          <h2>Analyze mode</h2>
-          <p>Scan files or projects with TypeScript diagnostics and heuristics.</p>
-          <pre><code># Analyze all JS/TS files under a directory
+          <div id="analyze" class="doc-section reveal" style="--delay: 160ms">
+            <h2>Analyze mode</h2>
+            <p>
+              Scan files or projects with TypeScript diagnostics and heuristics.
+            </p>
+            <pre><code># Analyze all JS/TS files under a directory
 bigbro analyze fixtures
 
 # Specific globs
@@ -91,33 +115,33 @@ bigbro analyze fixtures --format eslint
 
 # Safe autofix (experimental)
 bigbro analyze src --fix</code></pre>
-        </div>
+          </div>
 
-        <div id="formats" class="doc-section reveal" style="--delay: 200ms">
-          <h2>Output formats</h2>
-          <div class="grid-2">
-            <div class="doc-card">
-              <h4>Text</h4>
-              <p>Human-friendly explanation and next step guidance.</p>
-            </div>
-            <div class="doc-card">
-              <h4>JSON</h4>
-              <p>Structured data for scripts and automation.</p>
-            </div>
-            <div class="doc-card">
-              <h4>ESLint</h4>
-              <p>Drop-in compatibility with linting workflows.</p>
-            </div>
-            <div class="doc-card">
-              <h4>SARIF</h4>
-              <p>Security and code scanning dashboards.</p>
+          <div id="formats" class="doc-section reveal" style="--delay: 200ms">
+            <h2>Output formats</h2>
+            <div class="grid-2">
+              <div class="doc-card">
+                <h4>Text</h4>
+                <p>Developer-friendly explanation and next step guidance.</p>
+              </div>
+              <div class="doc-card">
+                <h4>JSON</h4>
+                <p>Structured data for scripts and automation.</p>
+              </div>
+              <div class="doc-card">
+                <h4>ESLint</h4>
+                <p>Drop-in compatibility with linting workflows.</p>
+              </div>
+              <div class="doc-card">
+                <h4>SARIF</h4>
+                <p>Security and code scanning dashboards.</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div id="library" class="doc-section reveal" style="--delay: 240ms">
-          <h2>Library usage (ESM)</h2>
-          <pre><code>import {
+          <div id="library" class="doc-section reveal" style="--delay: 240ms">
+            <h2>Library usage (ESM)</h2>
+            <pre><code>import {
   explainError,
   explainFromStackTrace,
   analyzeFile,
@@ -128,28 +152,36 @@ const entry = explainError({ message: "TS2339: Property 'x' does not exist" });
 const stackEntry = explainFromStackTrace(stackString);
 const single = analyzeFile("src/example.ts");
 const many = analyzeFiles(["src/**/*.ts"]);</code></pre>
-        </div>
-
-        <div id="exit-codes" class="doc-section reveal" style="--delay: 280ms">
-          <h2>Exit codes</h2>
-          <div class="doc-card">
-            <ul class="list">
-              <li><span class="label">0</span> Explanations or findings exist.</li>
-              <li><span class="label">2</span> No explanations or findings.</li>
-            </ul>
           </div>
+
+          <div
+            id="exit-codes"
+            class="doc-section reveal"
+            style="--delay: 280ms"
+          >
+            <h2>Exit codes</h2>
+            <div class="doc-card">
+              <ul class="list">
+                <li>
+                  <span class="label">0</span> Explanations or findings exist.
+                </li>
+                <li>
+                  <span class="label">2</span> No explanations or findings.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container">
+          <span>Need the highlights?</span>
+          <a class="button ghost" href="index.html">Back to home</a>
         </div>
-      </section>
-    </main>
+      </footer>
+    </div>
 
-    <footer class="site-footer">
-      <div class="container">
-        <span>Need the highlights?</span>
-        <a class="button ghost" href="index.html">Back to home</a>
-      </div>
-    </footer>
-  </div>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
