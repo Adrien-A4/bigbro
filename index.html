@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>big-brocode Fast Error Explanations</title>
+    <title>big-brocode</title>
     <meta
       name="description"
       content="Explain JS/TS/React errors fast with TypeScript-powered diagnostics, multiple output formats, and safe autofix hooks."
@@ -13,6 +13,10 @@
     <link
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@300;400;600;700&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -68,7 +72,7 @@
               <span class="dot"></span>
               <span class="panel-title">terminal</span>
             </div>
-            <pre><code>$ npm install -g big-brocode
+            <pre><code class="language-bash">$ npm install -g big-brocode
 $ bigbro "TS2339: Property 'x' does not exist"
 
 Explains the root cause and suggests a fix.
@@ -151,13 +155,13 @@ Finds issues across a project with real TS diagnostics.</code></pre>
           <div class="grid-2">
             <div class="code-card reveal" style="--delay: 0ms">
               <h4>Explain a single error</h4>
-              <pre><code>bigbro "TypeError: Cannot read properties of undefined"
+              <pre><code class="language-bash">bigbro "TypeError: Cannot read properties of undefined"
 
 bigbro --code 2304 --language typescript</code></pre>
             </div>
             <div class="code-card reveal" style="--delay: 80ms">
               <h4>Analyze a project</h4>
-              <pre><code>bigbro analyze src --format json
+              <pre><code class="language-bash">bigbro analyze src --format json
 
 bigbro analyze fixtures --fix</code></pre>
             </div>
@@ -173,7 +177,7 @@ bigbro analyze fixtures --fix</code></pre>
                 product, not debugging archaeology.
               </p>
             </div>
-            <a class="button" href="docs.html">Start with docs</a>
+            <a class="button" href="docs.html">Read the docs </a>
           </div>
         </section>
       </main>
@@ -186,6 +190,7 @@ bigbro analyze fixtures --fix</code></pre>
       </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/highlight.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

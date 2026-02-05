@@ -1,91 +1,146 @@
-(() => {
+document.body.classList.remove("no-js");
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px",
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("is-visible");
+    } else {
+      entry.target.classList.remove("is-visible");
+    }
+  });
+}, observerOptions);
+
+document.addEventListener("DOMContentLoaded", () => {
   const page = document.querySelector(".page");
-  if (!page) return;
-
-  const body = document.body;
-  body.classList.remove("no-js");
-  body.classList.add("js");
-
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const transitionMs = 320;
-
-  const revealElements = Array.from(document.querySelectorAll(".reveal"));
-
-  const showPage = () => {
-    page.classList.remove("is-leaving");
-    if (prefersReduced) {
-      page.classList.add("is-loaded");
-      revealElements.forEach((el) => el.classList.add("in"));
-      return;
-    }
+  if (page) {
     requestAnimationFrame(() => {
-      page.classList.add("is-loaded");
+      page.classList.add("is-ready");
     });
-  };
+  }
 
-  const revealOnScroll = () => {
-    if (prefersReduced || revealElements.length === 0) {
-      revealElements.forEach((el) => el.classList.add("in"));
+  window.addEventListener("pageshow", () => {
+    if (!page) return;
+    page.classList.remove("is-exiting");
+    page.classList.add("is-ready");
+  });
+
+  if (window.hljs) {
+    window.hljs.highlightAll();
+  }
+
+  const reveals = document.querySelectorAll(".reveal");
+  reveals.forEach((el) => {
+    observer.observe(el);
+  });
+
+  const navigateWithFade = (url) => {
+    if (!page) {
+      window.location.href = url;
       return;
     }
-
-    if (!("IntersectionObserver" in window)) {
-      revealElements.forEach((el) => el.classList.add("in"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in");
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    revealElements.forEach((el) => observer.observe(el));
+    page.classList.add("is-exiting");
+    window.setTimeout(() => {
+      window.location.href = url;
+    }, 200);
   };
 
-  const shouldIgnoreLink = (link) => {
-    if (!link || link.target === "_blank") return true;
-    if (link.hasAttribute("download")) return true;
-    const href = link.getAttribute("href");
-    if (!href || href.startsWith("#")) return true;
-    if (href.startsWith("mailto:") || href.startsWith("tel:")) return true;
-    return false;
-  };
-
-  const handleLinkClick = (event) => {
-    if (event.defaultPrevented) return;
-    if (event.button !== 0) return;
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  document.addEventListener("click", (event) => {
     const link = event.target.closest("a");
-    if (shouldIgnoreLink(link)) return;
+    if (!link) return;
 
-    const url = new URL(link.href, window.location.href);
-    const sameOrigin = url.origin === window.location.origin;
-    const samePage = url.pathname === window.location.pathname && url.search === window.location.search;
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#")) return;
+    if (link.target && link.target !== "_self") return;
+    if (href.startsWith("mailto:") || href.startsWith("tel:")) return;
 
-    if (!sameOrigin || samePage) return;
+    const url = new URL(href, window.location.href);
+    if (url.origin !== window.location.origin) return;
+    if (url.pathname === window.location.pathname && url.hash) return;
 
     event.preventDefault();
-    if (prefersReduced) {
-      window.location.href = url.href;
-      return;
+    navigateWithFade(url.href);
+  });
+
+  const header = document.querySelector(".site-header");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > 100) {
+      header.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.5)";
+    } else {
+      header.style.boxShadow = "none";
     }
+  });
 
-    page.classList.add("is-leaving");
-    window.setTimeout(() => {
-      window.location.href = url.href;
-    }, transitionMs);
-  };
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((block) => {
+    const pre = block.parentElement;
+    const wrapper = document.createElement("div");
+    wrapper.className = "code-wrap";
 
-  showPage();
-  revealOnScroll();
+    const toolbar = document.createElement("div");
+    toolbar.className = "code-toolbar";
 
-  document.addEventListener("click", handleLinkClick);
-  window.addEventListener("pageshow", showPage);
-})();
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "code-button";
+    button.textContent = "Copy";
+
+    button.addEventListener("click", async () => {
+      const text = block.textContent;
+      await navigator.clipboard.writeText(text);
+      button.textContent = "Copied!";
+      setTimeout(() => {
+        button.textContent = "Copy";
+      }, 2000);
+    });
+
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(toolbar);
+    toolbar.appendChild(button);
+    wrapper.appendChild(pre);
+  });
+
+  if (document.querySelector(".toc")) {
+    const sections = document.querySelectorAll(".doc-section[id]");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    const highlightTOC = () => {
+      let current = "";
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 150) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.style.color = "";
+        link.style.borderLeftColor = "";
+        if (link.getAttribute("href") === `#${current}`) {
+          link.style.color = "#e6edf3";
+          link.style.borderLeftColor = "#ff6b35";
+        }
+      });
+    };
+
+    window.addEventListener("scroll", highlightTOC);
+    highlightTOC();
+  }
+
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    if (e.target.classList.contains("button")) {
+      e.target.click();
+    }
+  }
+});
