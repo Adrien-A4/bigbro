@@ -28,6 +28,39 @@ document.addEventListener("DOMContentLoaded", () => {
     page.classList.add("is-ready");
   });
 
+  const themeToggle = document.querySelector(".theme-toggle");
+  const root = document.documentElement;
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const setTheme = (theme) => {
+    root.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+    if (!themeToggle) return;
+    const icon = themeToggle.querySelector("i");
+    if (icon) {
+      icon.className =
+        theme === "dark" ? "bi bi-sun-fill" : "bi bi-moon-stars-fill";
+    }
+    themeToggle.setAttribute(
+      "aria-label",
+      theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+    );
+  };
+
+  const storedTheme = localStorage.getItem("theme");
+  setTheme(storedTheme || (prefersDark ? "dark" : "light"));
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+      themeToggle.classList.add("is-animating");
+      setTheme(nextTheme);
+      window.setTimeout(() => {
+        themeToggle.classList.remove("is-animating");
+      }, 360);
+    });
+  }
+
   if (window.hljs) {
     window.hljs.highlightAll();
   }

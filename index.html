@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="logo.png" type="image/png" />
     <title>big-brocode</title>
     <meta
       name="description"
@@ -16,6 +17,10 @@
     />
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -24,12 +29,22 @@
     <div class="page">
       <header class="site-header">
         <div class="container nav">
-          <a class="logo" href="index.html">big-brocode</a>
+          <a class="logo" href="index.html">
+            <img src="logo.png" alt="big-brocode logo" />
+            <span>big-brocode</span>
+          </a>
           <nav class="nav-links">
             <a href="#features">Features</a>
             <a href="#workflow">Workflow</a>
             <a href="#examples">Examples</a>
             <a href="docs.html" class="button ghost">Docs</a>
+            <button
+              class="theme-toggle"
+              type="button"
+              aria-label="Toggle theme"
+            >
+              <i class="bi bi-sun-fill" aria-hidden="true"></i>
+            </button>
           </nav>
         </div>
       </header>
@@ -177,7 +192,10 @@ bigbro analyze fixtures --fix</code></pre>
 
       <footer class="site-footer">
         <div class="container">
-          <span>big-brocode</span>
+          <span class="footer-logo">
+            <img src="logo.png" alt="big-brocode logo" />
+            <span>big-brocode</span>
+          </span>
           <span>Explain. Diagnose. Ship.</span>
         </div>
       </footer>
