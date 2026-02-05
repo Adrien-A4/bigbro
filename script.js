@@ -110,29 +110,40 @@ document.addEventListener("DOMContentLoaded", () => {
     const sections = document.querySelectorAll(".doc-section[id]");
     const tocLinks = document.querySelectorAll(".toc a");
 
-    const highlightTOC = () => {
-      let current = "";
-
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (window.pageYOffset >= sectionTop - 150) {
-          current = section.getAttribute("id");
-        }
-      });
-
+    const setActive = (id) => {
       tocLinks.forEach((link) => {
-        link.style.color = "";
-        link.style.borderLeftColor = "";
-        if (link.getAttribute("href") === `#${current}`) {
-          link.style.color = "#e6edf3";
-          link.style.borderLeftColor = "#ff6b35";
-        }
+        link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
       });
     };
 
-    window.addEventListener("scroll", highlightTOC);
-    highlightTOC();
+    const tocObserver = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+          .forEach((entry, index) => {
+            if (index === 0) {
+              setActive(entry.target.getAttribute("id"));
+            }
+          });
+      },
+      {
+        rootMargin: "-20% 0px -60% 0px",
+        threshold: 0.1,
+      }
+    );
+
+    sections.forEach((section) => tocObserver.observe(section));
+
+    const activateFromHash = () => {
+      const id = window.location.hash.replace("#", "");
+      if (id) {
+        setActive(id);
+      }
+    };
+
+    window.addEventListener("hashchange", activateFromHash);
+    activateFromHash();
   }
 
 });
